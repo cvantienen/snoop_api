@@ -1,5 +1,6 @@
 FROM python:3.10-slim
 LABEL maintainer="Soxoj <soxoj@protonmail.com>"
+RUN mkdir -p /reports/html
 WORKDIR /app
 RUN pip install --no-cache-dir --upgrade pip
 RUN apt-get update && \
@@ -13,6 +14,5 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 COPY . .
 RUN YARL_NO_EXTENSIONS=1 python3 -m pip install --no-cache-dir .
-RUN mkdir -p app/maigret/reports/html
 EXPOSE 5000
 CMD ["python", "server.py"]
